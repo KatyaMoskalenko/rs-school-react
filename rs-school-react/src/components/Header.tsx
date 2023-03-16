@@ -1,17 +1,19 @@
 import React from 'react';
 
-class Header extends React.Component<
-  { [key: string]: string },
-  { header: string; headerName: string }
-> {
-  constructor(props: { [key: string]: string } | Readonly<{ string: string }>) {
+type HeaderState = {
+  header: string;
+  headerName: string;
+};
+
+class Header extends React.Component<Record<string, never>, HeaderState> {
+  constructor(props: Record<string, never>) {
     super(props);
     this.state = { header: window.location.pathname, headerName: '' };
 
     this.generateHeaderName = this.generateHeaderName.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     this.generateHeaderName(this.state.header);
   }
 
