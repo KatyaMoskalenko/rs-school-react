@@ -1,4 +1,4 @@
-import Header from 'components/Header';
+import Header from 'components/header/Header';
 import AboutUs from 'pages/AboutUs';
 import Error from 'pages/Error';
 import Home from 'pages/home/Home';

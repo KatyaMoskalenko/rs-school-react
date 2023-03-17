@@ -1,5 +1,5 @@
 import ProductCard from 'components/product-card/ProductCard';
-import Search from 'components/Search';
+import Search from 'components/search/Search';
 import React from 'react';
 import { products } from 'shared/mocks';
 import { Product } from 'utils/interfaces';

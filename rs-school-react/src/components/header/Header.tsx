@@ -1,4 +1,6 @@
+import Navigation from 'components/navigation/Navigation';
 import React from 'react';
+import './Header.scss';
 
 type HeaderState = {
   header: string;
@@ -32,9 +34,10 @@ class Header extends React.Component<Record<string, never>, HeaderState> {
 
   render() {
     return (
-      <>
+      <div className="header">
+        <Navigation />
         <header>{this.state.headerName}</header>
-      </>
+      </div>
     );
   }
 }

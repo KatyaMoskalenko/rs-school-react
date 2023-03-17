@@ -36,7 +36,7 @@ class ProductCard extends React.Component<ProductProps, Record<string, never>> {
               fill="currentColor"
             ></path>
           </svg>
-          <span className="card-button__text">Добавить</span>
+          <span className="card-button__text">Add to cart</span>
         </button>
       </div>
     );

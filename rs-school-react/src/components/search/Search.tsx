@@ -1,4 +1,5 @@
 import React from 'react';
+import './Search.scss';
 
 type SearchState = {
   value: string;
@@ -29,14 +30,17 @@ class Search extends React.Component<Record<string, never>, SearchState> {
 
   render() {
     return (
-      <div>
-        <form>
-          <label>
-            Search:
-            <input type="text" value={this.state.value} onChange={this.handleSearch} />
-          </label>
-        </form>
-      </div>
+      <form className="search">
+        <label className="search__label">
+          <input
+            className="search__input"
+            type="text"
+            placeholder="Search"
+            value={this.state.value}
+            onChange={this.handleSearch}
+          />
+        </label>
+      </form>
     );
   }
 }
