@@ -1,0 +1,58 @@
+export const products = [
+  {
+    imageSrc: 'https://source.unsplash.com/collection/8613861/350x202',
+    price: 4,
+    title: 'Аlmond croissant',
+    weight: 250,
+    id: 1,
+  },
+  {
+    imageSrc: 'https://source.unsplash.com/collection/8613861/350x203',
+    price: 3,
+    title: 'Apple pie',
+    weight: 80,
+    id: 2,
+  },
+  {
+    imageSrc: 'https://source.unsplash.com/collection/8613861/350x213',
+    price: 1,
+    title: 'Muffin',
+    weight: 80,
+    id: 3,
+  },
+  {
+    imageSrc: 'https://source.unsplash.com/collection/8613861/350x205',
+    price: 12,
+    title: 'Hot Dog',
+    weight: 200,
+    id: 4,
+  },
+  {
+    imageSrc: 'https://source.unsplash.com/collection/8613861/350x212',
+    price: 3,
+    title: 'Chocolate cookies',
+    weight: 200,
+    id: 5,
+  },
+  {
+    imageSrc: 'https://source.unsplash.com/collection/8613861/350x208',
+    price: 6,
+    title: 'Burger',
+    weight: 250,
+    id: 6,
+  },
+  {
+    imageSrc: 'https://source.unsplash.com/collection/8613861/350x211',
+    price: 7,
+    title: 'Sushi',
+    weight: 250,
+    id: 7,
+  },
+  {
+    imageSrc: 'https://source.unsplash.com/collection/8613861/350x210',
+    price: 2,
+    title: 'Brownie',
+    weight: 150,
+    id: 8,
+  },
+];

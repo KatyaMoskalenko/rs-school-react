@@ -1,7 +1,7 @@
 import Header from 'components/Header';
 import AboutUs from 'pages/AboutUs';
 import Error from 'pages/Error';
-import Home from 'pages/Home';
+import Home from 'pages/home/Home';
 import React from 'react';
 import { Route } from 'react-router';
 import { BrowserRouter, Routes } from 'react-router-dom';
