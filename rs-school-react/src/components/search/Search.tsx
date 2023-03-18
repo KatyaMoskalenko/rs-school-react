@@ -2,29 +2,23 @@ import React from 'react';
 import './Search.scss';
 
 type SearchState = {
-  value: string;
+  value: string | null;
 };
 
 class Search extends React.Component<Record<string, never>, SearchState> {
   constructor(props: Record<string, never>) {
     super(props);
     this.state = {
-      value: '',
+      value: localStorage.getItem('searchValue'),
     };
     this.handleSearch = this.handleSearch.bind(this);
   }
 
-  componentDidMount(): void {
-    const searchValue = localStorage.getItem('searchValue');
-    if (searchValue != null) {
-      this.setState({ value: searchValue });
-    } else {
-      this.setState({ value: '' });
-    }
+  componentWillUnmount(): void {
+    localStorage.setItem('searchValue', this.state.value ? this.state.value : '');
   }
 
   handleSearch(event: React.ChangeEvent<HTMLInputElement>): void {
-    localStorage.setItem('searchValue', event.target.value);
     this.setState({ value: event.target.value });
   }
 
@@ -36,7 +30,7 @@ class Search extends React.Component<Record<string, never>, SearchState> {
             className="search__input"
             type="text"
             placeholder="Search"
-            value={this.state.value}
+            value={this.state.value ? this.state.value : ''}
             onChange={this.handleSearch}
           />
         </label>
