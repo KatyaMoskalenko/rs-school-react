@@ -1,40 +1,30 @@
+import { WithRouterProps } from 'components/withRouterHOC/withRouter';
 import React from 'react';
 import './Header.scss';
 
-type HeaderState = {
-  header: string;
-  headerName: string;
-};
-
-class Header extends React.Component<Record<string, never>, HeaderState> {
-  constructor(props: Record<string, never>) {
+class Header extends React.Component<WithRouterProps> {
+  constructor(props: WithRouterProps) {
     super(props);
-    this.state = { header: window.location.pathname, headerName: '' };
-
     this.generateHeaderName = this.generateHeaderName.bind(this);
   }
 
-  componentDidMount(): void {
-    this.generateHeaderName(this.state.header);
-  }
-
-  generateHeaderName(header: string): void {
+  generateHeaderName(header: string): string {
     switch (header) {
       case '/about':
-        this.setState({ headerName: 'About Us' });
+        return 'About Us';
         break;
       case '/':
-        this.setState({ headerName: 'Home' });
+        return 'Home';
         break;
       default:
-        this.setState({ headerName: 'Error' });
+        return 'Error';
     }
   }
 
   render() {
     return (
       <div className="header">
-        <header>{this.state.headerName}</header>
+        <header>{this.generateHeaderName(this.props.location.pathname)}</header>
       </div>
     );
   }

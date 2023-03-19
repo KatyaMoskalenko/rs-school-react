@@ -7,14 +7,14 @@ class Navigation extends React.Component {
     return (
       <div className="navigation">
         <NavLink
-          to={'/'}
+          to={''}
           className={({ isActive }) => (isActive ? 'active navigation__item' : 'navigation__item')}
         >
           Home
         </NavLink>
         <div className="navigation__delimiter">/</div>
         <NavLink
-          to={'/about'}
+          to={'about'}
           className={({ isActive }) => (isActive ? 'active navigation__item' : 'navigation__item')}
         >
           About Us
