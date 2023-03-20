@@ -2,8 +2,11 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/About Us/i);
-  expect(linkElement).toBeInTheDocument();
+describe('App', () => {
+  it('renders App component', () => {
+    render(<App />);
+    expect(screen.getByPlaceholderText(/Search/i)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/Search/i)).not.toBeRequired();
+    expect(screen.getByText(/About Us/i)).toBeInTheDocument();
+  });
 });
