@@ -7,6 +7,7 @@ describe('App', () => {
     render(<App />);
     expect(screen.getByPlaceholderText(/Search/i)).toBeInTheDocument();
     expect(screen.getByPlaceholderText(/Search/i)).not.toBeRequired();
-    expect(screen.getByText(/About Us/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/Home/i)).toHaveLength(2);
+    expect(screen.getAllByText(/About Us/i)).toHaveLength(1);
   });
 });

@@ -20,6 +20,10 @@ class Navigation extends React.Component {
         <NavLink to={'about'} className={setActive}>
           About Us
         </NavLink>
+        <div className="navigation__delimiter">/</div>
+        <NavLink to={'create'} className={setActive}>
+          Create new product
+        </NavLink>
       </div>
     );
   }
