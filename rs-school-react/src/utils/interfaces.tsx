@@ -4,6 +4,7 @@ export interface Product {
   isVegan?: boolean;
   isGlutenFree?: boolean;
   isLactoseFree?: boolean;
+  isNoDietary?: boolean;
   isAvailable?: boolean;
   weight: string;
   imageSrc: string;

@@ -4,6 +4,13 @@ import './AddProductForm.scss';
 
 export interface CreateProductFormState {
   products: Product[];
+  titleError: boolean;
+  priceError: boolean;
+  weightError: boolean;
+  dateError: boolean;
+  dietaryError: boolean;
+  imageError: boolean;
+  availabilityError: boolean;
 }
 
 export interface CreateProductFormProps {
@@ -15,6 +22,13 @@ class CreateProductForm extends React.Component<CreateProductFormProps, CreatePr
     super(props);
     this.state = {
       products: [],
+      titleError: false,
+      priceError: false,
+      weightError: false,
+      dateError: false,
+      dietaryError: false,
+      imageError: false,
+      availabilityError: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.clearForm = this.clearForm.bind(this);
@@ -22,36 +36,121 @@ class CreateProductForm extends React.Component<CreateProductFormProps, CreatePr
 
   private selectRef = React.createRef<HTMLSelectElement>();
   private titleRef = React.createRef<HTMLInputElement>();
-  private priceRef = React.createRef<HTMLInputElement>();
+  private weightRef = React.createRef<HTMLInputElement>();
   private dateInputRef = React.createRef<HTMLInputElement>();
   private lactoseFreeCheckboxRef = React.createRef<HTMLInputElement>();
   private veganCheckboxRef = React.createRef<HTMLInputElement>();
   private glutenFreeCheckboxRef = React.createRef<HTMLInputElement>();
+  private noDietaryCheckboxRef = React.createRef<HTMLInputElement>();
   private radioRef = React.createRef<HTMLInputElement>();
   private fileInput = React.createRef<HTMLInputElement>();
 
   private handleSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
     const newProduct: Product = {
-      title: this.titleRef.current?.value || '',
-      price: this.priceRef.current?.value || '',
-      date: this.dateInputRef.current?.value,
-      isVegan: this.veganCheckboxRef.current?.checked,
-      isGlutenFree: this.glutenFreeCheckboxRef.current?.checked,
-      isLactoseFree: this.lactoseFreeCheckboxRef.current?.checked,
-      isAvailable: this.radioRef.current?.checked,
-      weight: this.selectRef.current?.value || '',
-      imageSrc: this.fileInput.current?.value || '',
+      title: '',
+      date: '',
+      isVegan: false,
+      isGlutenFree: false,
+      isLactoseFree: false,
+      isNoDietary: false,
+      isAvailable: false,
+      weight: '',
+      imageSrc: '',
+      price: '',
     };
+    this.titleRef.current?.value
+      ? (newProduct.title = this.titleRef.current?.value) &&
+        this.setState(() => {
+          return { titleError: false };
+        })
+      : this.setState(() => {
+          return { titleError: true };
+        }),
+      this.weightRef.current?.value
+        ? (newProduct.weight = this.weightRef.current?.value) &&
+          this.setState(() => {
+            return { weightError: false };
+          })
+        : this.setState(() => {
+            return { weightError: true };
+          }),
+      this.dateInputRef.current?.value
+        ? (newProduct.date = this.dateInputRef.current?.value) &&
+          this.setState(() => {
+            return { dateError: false };
+          })
+        : this.setState(() => {
+            return { dateError: true };
+          }),
+      this.veganCheckboxRef.current?.checked
+        ? (newProduct.isVegan = this.veganCheckboxRef.current?.checked) &&
+          this.setState(() => {
+            return { dietaryError: false };
+          })
+        : this.glutenFreeCheckboxRef.current?.checked
+        ? (newProduct.isGlutenFree = this.glutenFreeCheckboxRef.current?.checked) &&
+          this.setState(() => {
+            return { dietaryError: false };
+          })
+        : this.lactoseFreeCheckboxRef.current?.checked
+        ? (newProduct.isLactoseFree = this.lactoseFreeCheckboxRef.current?.checked) &&
+          this.setState(() => {
+            return { dietaryError: false };
+          })
+        : this.noDietaryCheckboxRef.current?.checked
+        ? (newProduct.isNoDietary = this.noDietaryCheckboxRef.current?.checked) &&
+          this.setState(() => {
+            return { dietaryError: false };
+          })
+        : this.setState(() => {
+            return { dietaryError: true };
+          }),
+      this.radioRef.current?.checked
+        ? (newProduct.isAvailable = this.radioRef.current?.checked) &&
+          this.setState(() => {
+            return { availabilityError: false };
+          })
+        : this.setState(() => {
+            return { availabilityError: true };
+          }),
+      this.selectRef.current?.value
+        ? (newProduct.price = this.selectRef.current?.value) &&
+          this.setState(() => {
+            return { priceError: false };
+          })
+        : this.setState(() => {
+            return { priceError: true };
+          }),
+      this.fileInput.current?.value
+        ? (newProduct.imageSrc = this.fileInput.current?.value) &&
+          this.setState(() => {
+            return { imageError: false };
+          })
+        : this.setState(() => {
+            return { imageError: true };
+          });
+
+    // const errors = Object.values(this.state);
+    // errors.splice(0, 1);
+    // console.log(errors);
+    // if (
+    //   errors.some((value: boolean | Product[]) => {
+    //     return value === false;
+    //   })
+    // ) {
+    //   return;
+    // } else {
     this.setState({ products: [...this.state.products, newProduct] });
     this.props.updateNewProductsList([...this.state.products, newProduct]);
     alert('New Product was added');
     this.clearForm();
+    // }
   }
 
   private clearForm(): void {
     this.titleRef.current && (this.titleRef.current.value = '');
-    this.priceRef.current && (this.priceRef.current.value = '');
+    this.weightRef.current && (this.weightRef.current.value = '');
     this.dateInputRef.current && (this.dateInputRef.current.value = '');
     this.veganCheckboxRef.current && (this.veganCheckboxRef.current.checked = false);
     this.glutenFreeCheckboxRef.current && (this.glutenFreeCheckboxRef.current.checked = false);
@@ -68,34 +167,49 @@ class CreateProductForm extends React.Component<CreateProductFormProps, CreatePr
           <label>
             Title <input type="text" ref={this.titleRef} />
           </label>
+          {this.state.titleError && <div className="error">Enter please Title</div>}
           <label>
-            Price <input type="text" ref={this.priceRef} />
+            Weight <input type="text" ref={this.weightRef} />
           </label>
+          {this.state.weightError && <div className="error">Enter please Weight</div>}
           <label>
-            Weight:
+            Price:
             <select ref={this.selectRef}>
+              <option></option>
               <option>80</option>
               <option>250</option>
             </select>
           </label>
+          {this.state.priceError && <div className="error">Select please Price</div>}
           <label>
             Start date:
             <input type="date" ref={this.dateInputRef} />
           </label>
-
+          {this.state.dateError && <div className="error">Select please Date</div>}
           <label>
             Vegan:
             <input type="checkbox" ref={this.veganCheckboxRef} />
+          </label>
+          <label>
             Lactose Free:
             <input type="checkbox" ref={this.lactoseFreeCheckboxRef} />
+          </label>
+          <label>
             Gluten Free:
             <input type="checkbox" ref={this.glutenFreeCheckboxRef} />
           </label>
           <label>
+            No Dietary:
+            <input type="checkbox" ref={this.noDietaryCheckboxRef} />
+          </label>
+          {this.state.dietaryError && <div className="error">Select please Dietary</div>}
+          <label>
             Is available
             <input type="radio" ref={this.radioRef} />
           </label>
+          {this.state.availabilityError && <div className="error">Check please Availability</div>}
           <input type="file" ref={this.fileInput} />
+          {this.state.availabilityError && <div className="error">Add please Image</div>}
           <button type="submit">Submit</button>
         </form>
       </>
