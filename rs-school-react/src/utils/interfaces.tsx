@@ -7,7 +7,7 @@ export interface Product {
   isNoDietary?: boolean;
   isAvailable?: boolean;
   weight: string;
-  imageSrc: string;
+  imageSrc?: string;
   price: string;
   id?: number;
 }

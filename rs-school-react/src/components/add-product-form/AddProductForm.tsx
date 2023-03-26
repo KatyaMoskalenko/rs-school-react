@@ -116,7 +116,7 @@ class CreateProductForm extends React.Component<CreateProductFormProps, CreatePr
             return { priceError: true };
           }),
       this.fileInput.current?.value
-        ? (newProduct.imageSrc = this.fileInput.current?.value) &&
+        ? (newProduct.imageSrc = URL.createObjectURL(this.fileInput.current?.files?.[0] as Blob)) &&
           this.setState(() => {
             return { imageError: false };
           })
