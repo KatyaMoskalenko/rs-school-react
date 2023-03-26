@@ -1,0 +1,27 @@
+.navigation {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 16px;
+  line-height: 18px;
+  font-family: 'YSText', sans-serif;
+
+  &__item {
+    background-color: rgba(92, 90, 87, 0.1);
+    border-radius: 24px;
+    padding: 4px 8px;
+    text-decoration: none;
+    color: black;
+
+    &:hover {
+      background-color: rgba(92, 90, 87, 0.3);
+    }
+
+    &.active {
+      background-color: rgba(92, 90, 87, 0.3);
+    }
+  }
+
+  &__delimiter {
+    padding: 4px 8px;
+  }
+}
