@@ -9,7 +9,7 @@ import Layout from 'components/layout/Layout';
 import CreateNewProduct from 'pages/create-new-product/CreateNewProduct';
 
 class App extends React.Component {
-  render() {
+  render(): React.ReactNode {
     return (
       <BrowserRouter>
         <Routes>
