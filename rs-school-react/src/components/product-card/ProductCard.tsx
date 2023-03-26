@@ -13,7 +13,7 @@ class ProductCard extends React.Component<ProductProps, Record<string, never>> {
 
   render() {
     return (
-      <div className="card">
+      <div className="card" data-testid="product-card">
         <img className="card-image" src={this.props.card.imageSrc} />
         <>
           <div className="card-price">{this.props.card.price}$</div>
