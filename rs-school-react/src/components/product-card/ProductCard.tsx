@@ -24,7 +24,7 @@ class ProductCard extends React.Component<ProductProps, Record<string, never>> {
         <div className="card-tags">
           {this.props.card.isGlutenFree && <div>Gluten Free</div>}
           {this.props.card.isVegan && <div>Vegan</div>}
-          {this.props.card.isLactoseFree && <div>lactose Free</div>}
+          {this.props.card.isLactoseFree && <div>Lactose Free</div>}
         </div>
         {this.props.card.isAvailable && (
           <button className="card-button">

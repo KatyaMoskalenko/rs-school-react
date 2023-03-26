@@ -41,7 +41,6 @@ class CreateProductForm extends React.Component<CreateProductFormProps, CreatePr
   private lactoseFreeCheckboxRef = React.createRef<HTMLInputElement>();
   private veganCheckboxRef = React.createRef<HTMLInputElement>();
   private glutenFreeCheckboxRef = React.createRef<HTMLInputElement>();
-  private noDietaryCheckboxRef = React.createRef<HTMLInputElement>();
   private radioRef = React.createRef<HTMLInputElement>();
   private fileInput = React.createRef<HTMLInputElement>();
 
@@ -53,7 +52,6 @@ class CreateProductForm extends React.Component<CreateProductFormProps, CreatePr
       isVegan: false,
       isGlutenFree: false,
       isLactoseFree: false,
-      isNoDietary: false,
       isAvailable: false,
       weight: '',
       imageSrc: '',
@@ -98,11 +96,6 @@ class CreateProductForm extends React.Component<CreateProductFormProps, CreatePr
           this.setState(() => {
             return { dietaryError: false };
           })
-        : this.noDietaryCheckboxRef.current?.checked
-        ? (newProduct.isNoDietary = this.noDietaryCheckboxRef.current?.checked) &&
-          this.setState(() => {
-            return { dietaryError: false };
-          })
         : this.setState(() => {
             return { dietaryError: true };
           }),
@@ -131,21 +124,18 @@ class CreateProductForm extends React.Component<CreateProductFormProps, CreatePr
             return { imageError: true };
           });
 
-    // const errors = Object.values(this.state);
-    // errors.splice(0, 1);
-    // console.log(errors);
-    // if (
-    //   errors.some((value: boolean | Product[]) => {
-    //     return value === false;
-    //   })
-    // ) {
-    //   return;
-    // } else {
-    this.setState({ products: [...this.state.products, newProduct] });
-    this.props.updateNewProductsList([...this.state.products, newProduct]);
-    alert('New Product was added');
-    this.clearForm();
-    // }
+    setTimeout(() => this.checkForm(newProduct), 0);
+  }
+
+  private checkForm(newProduct: Product): void {
+    if (Object.values(this.state).includes(true)) {
+      return;
+    } else {
+      this.setState({ products: [...this.state.products, newProduct] });
+      this.props.updateNewProductsList([...this.state.products, newProduct]);
+      alert('New Product was added');
+      this.clearForm();
+    }
   }
 
   private clearForm(): void {
@@ -169,7 +159,7 @@ class CreateProductForm extends React.Component<CreateProductFormProps, CreatePr
           </label>
           {this.state.titleError && <div className="error">Enter please Title</div>}
           <label>
-            Weight <input type="text" ref={this.weightRef} />
+            Weight <input type="number" ref={this.weightRef} />
           </label>
           {this.state.weightError && <div className="error">Enter please Weight</div>}
           <label>
@@ -198,10 +188,6 @@ class CreateProductForm extends React.Component<CreateProductFormProps, CreatePr
             Gluten Free:
             <input type="checkbox" ref={this.glutenFreeCheckboxRef} />
           </label>
-          <label>
-            No Dietary:
-            <input type="checkbox" ref={this.noDietaryCheckboxRef} />
-          </label>
           {this.state.dietaryError && <div className="error">Select please Dietary</div>}
           <label>
             Is available
@@ -209,7 +195,7 @@ class CreateProductForm extends React.Component<CreateProductFormProps, CreatePr
           </label>
           {this.state.availabilityError && <div className="error">Check please Availability</div>}
           <input type="file" ref={this.fileInput} />
-          {this.state.availabilityError && <div className="error">Add please Image</div>}
+          {this.state.imageError && <div className="error">Add please Image</div>}
           <button type="submit">Submit</button>
         </form>
       </>
