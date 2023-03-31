@@ -14,7 +14,7 @@ export default function CreateNewProduct(): ReturnType<React.FC> {
   return (
     <>
       <CreateProductForm
-        updateNewProductsList={() => {
+        updateNewProductsList={(products) => {
           setProducts(products);
         }}
       />
