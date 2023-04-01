@@ -1,42 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Search.scss';
 
-type SearchState = {
-  value: string | null;
-};
+export default function Search(): ReturnType<React.FC> {
+  const [value, setValue] = useState<string | null>(localStorage.getItem('searchValue'));
 
-class Search extends React.Component<Record<string, never>, SearchState> {
-  constructor(props: Record<string, never>) {
-    super(props);
-    this.state = {
-      value: localStorage.getItem('searchValue'),
+  useEffect(() => {
+    return () => {
+      localStorage.setItem('searchValue', value ? value : '');
     };
-    this.handleSearch = this.handleSearch.bind(this);
+  }, [value]);
+
+  function handleSearch(event: React.ChangeEvent<HTMLInputElement>): void {
+    setValue(event.target.value);
   }
 
-  componentWillUnmount(): void {
-    localStorage.setItem('searchValue', this.state.value ? this.state.value : '');
-  }
-
-  handleSearch(event: React.ChangeEvent<HTMLInputElement>): void {
-    this.setState({ value: event.target.value });
-  }
-
-  render() {
-    return (
-      <form className="search">
-        <label className="search__label">
-          <input
-            className="search__input"
-            type="text"
-            placeholder="Search"
-            value={this.state.value ? this.state.value : ''}
-            onChange={this.handleSearch}
-          />
-        </label>
-      </form>
-    );
-  }
+  return (
+    <form className="search">
+      <label className="search__label">
+        <input
+          className="search__input"
+          type="text"
+          placeholder="Search"
+          value={value ? value : ''}
+          onChange={handleSearch}
+        />
+      </label>
+    </form>
+  );
 }
-
-export default Search;
