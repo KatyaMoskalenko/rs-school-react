@@ -11,21 +11,12 @@ export interface CreateProductFormState {
 export interface CreateProductFormProps {
   updateNewProductsList: (products: Product[]) => void;
 }
-CreateProductForm;
-export default function CreateProductForm(props: CreateProductFormProps): ReturnType<React.FC> {
+
+export default function CreateProductForm({
+  updateNewProductsList,
+}: CreateProductFormProps): ReturnType<React.FC> {
   const [state, setState] = useState<CreateProductFormState>({ products: [] });
   const [dietary, setDietary] = useState<boolean>(true);
-
-  useEffect(() => {
-    if (state.products.length) {
-      props.updateNewProductsList([...state.products]);
-      alert('New Product was added');
-      reset((formValues) => {
-        formValues = {};
-      });
-    }
-  }, [state.products]);
-
   const {
     register,
     handleSubmit,
@@ -34,14 +25,24 @@ export default function CreateProductForm(props: CreateProductFormProps): Return
     getValues,
   } = useForm();
 
-  const getDietaryValues = (): void => {
+  useEffect(() => {
+    if (state.products.length) {
+      updateNewProductsList([...state.products]);
+      alert('New Product was added');
+      reset((formValues) => {
+        formValues = {};
+      });
+    }
+  }, [state.products]);
+
+  function getDietaryValues(): void {
     const dietaryValues = getValues(['isVegan', 'isGlutenFree', 'isGlutenFree']);
     if (dietaryValues.includes(true)) {
       setDietary(true);
     } else {
       setDietary(false);
     }
-  };
+  }
 
   const addProduct = (data: FieldValues): void => {
     const newProduct: Product = {
@@ -59,7 +60,7 @@ export default function CreateProductForm(props: CreateProductFormProps): Return
   };
 
   function onSubmit(data: FieldValues): void {
-    dietary && addProduct(data);
+    setTimeout(() => dietary && addProduct(data));
   }
 
   return (
