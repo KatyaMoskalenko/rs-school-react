@@ -32,6 +32,7 @@ export default function CreateProductForm({
       reset((formValues) => {
         formValues = {};
       });
+      setDietary(true);
     }
   }, [state.products]);
 
@@ -59,7 +60,8 @@ export default function CreateProductForm({
     setState({ products: [...state.products, newProduct] });
   };
 
-  function onSubmit(data: FieldValues): void {
+  async function onSubmit(data: FieldValues): Promise<void> {
+    await getDietaryValues();
     setTimeout(() => dietary && addProduct(data));
   }
 
@@ -108,7 +110,12 @@ export default function CreateProductForm({
         {errors.isAvailable && <div className="error">Check please Availability</div>}
         <input type="file" {...register('imageSrc', { required: true })} />
         {errors.imageSrc && <div className="error">Add please Image</div>}
-        <button type="submit" onClick={() => getDietaryValues()}>
+        <button
+          type="submit"
+          onClick={() => {
+            getDietaryValues();
+          }}
+        >
           Submit
         </button>
       </form>
