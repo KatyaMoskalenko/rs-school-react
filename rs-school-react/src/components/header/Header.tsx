@@ -15,18 +15,10 @@ export const generateHeaderName = (header: string): string => {
   }
 };
 
-class Header extends React.Component<WithRouterProps> {
-  constructor(props: WithRouterProps) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <div className="header">
-        <header>{generateHeaderName(this.props.location.pathname)}</header>
-      </div>
-    );
-  }
+export default function Header(props: WithRouterProps): ReturnType<React.FC> {
+  return (
+    <div className="header">
+      <header>{generateHeaderName(props.location.pathname)}</header>
+    </div>
+  );
 }
-
-export default Header;
