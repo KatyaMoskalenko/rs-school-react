@@ -14,12 +14,13 @@ export interface CreateProductFormProps {
 CreateProductForm;
 export default function CreateProductForm(props: CreateProductFormProps): ReturnType<React.FC> {
   const [state, setState] = useState<CreateProductFormState>({ products: [] });
+  const [dietary, setDietary] = useState<boolean>(true);
 
   useEffect(() => {
     if (state.products.length) {
       props.updateNewProductsList([...state.products]);
       alert('New Product was added');
-      reset((formValues: FieldValues) => {
+      reset((formValues) => {
         formValues = {};
       });
     }
@@ -30,9 +31,19 @@ export default function CreateProductForm(props: CreateProductFormProps): Return
     handleSubmit,
     formState: { errors },
     reset,
+    getValues,
   } = useForm();
 
-  const onSubmit = (data: FieldValues): void => {
+  const getDietaryValues = (): void => {
+    const dietaryValues = getValues(['isVegan', 'isGlutenFree', 'isGlutenFree']);
+    if (dietaryValues.includes(true)) {
+      setDietary(true);
+    } else {
+      setDietary(false);
+    }
+  };
+
+  const addProduct = (data: FieldValues): void => {
     const newProduct: Product = {
       title: data.title,
       date: data.date,
@@ -46,6 +57,10 @@ export default function CreateProductForm(props: CreateProductFormProps): Return
     };
     setState({ products: [...state.products, newProduct] });
   };
+
+  function onSubmit(data: FieldValues): void {
+    dietary && addProduct(data);
+  }
 
   return (
     <>
@@ -74,17 +89,17 @@ export default function CreateProductForm(props: CreateProductFormProps): Return
         {errors.date && <div className="error">Select please Date</div>}
         <label>
           Vegan:
-          <input type="checkbox" {...register('isVegan', { required: true })} />
+          <input type="checkbox" {...register('isVegan')} />
         </label>
         <label>
           Lactose Free:
-          <input type="checkbox" {...register('isLactoseFree', { required: true })} />
+          <input type="checkbox" {...register('isLactoseFree')} />
         </label>
         <label>
           Gluten Free:
-          <input type="checkbox" {...register('isGlutenFree', { required: true })} />
+          <input type="checkbox" {...register('isGlutenFree')} />
         </label>
-        {errors.isGlutenFree && <div className="error">Select please Dietary</div>}
+        {dietary === false && <div className="error">Select please Dietary</div>}
         <label>
           Is available
           <input type="radio" {...register('isAvailable', { required: true })} />
@@ -92,7 +107,9 @@ export default function CreateProductForm(props: CreateProductFormProps): Return
         {errors.isAvailable && <div className="error">Check please Availability</div>}
         <input type="file" {...register('imageSrc', { required: true })} />
         {errors.imageSrc && <div className="error">Add please Image</div>}
-        <button type="submit">Submit</button>
+        <button type="submit" onClick={() => getDietaryValues()}>
+          Submit
+        </button>
       </form>
     </>
   );
