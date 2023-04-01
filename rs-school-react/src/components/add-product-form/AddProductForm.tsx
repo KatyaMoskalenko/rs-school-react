@@ -32,7 +32,7 @@ export default function CreateProductForm({
   }, [reset]);
 
   function getDietaryValues(): void {
-    const dietaryValues = getValues(['isVegan', 'isGlutenFree', 'isGlutenFree']);
+    const dietaryValues = getValues(['isVegan', 'isLactoseFree', 'isGlutenFree']);
     if (dietaryValues.includes(true)) {
       setDietary(true);
     } else {
