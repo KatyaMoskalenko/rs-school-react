@@ -26,15 +26,10 @@ export default function CreateProductForm({
   } = useForm();
 
   useEffect(() => {
-    if (state.products.length) {
-      updateNewProductsList([...state.products]);
-      alert('New Product was added');
-      reset((formValues) => {
-        formValues = {};
-      });
-      setDietary(true);
-    }
-  }, [state.products]);
+    reset({
+      data: '',
+    });
+  }, [reset]);
 
   function getDietaryValues(): void {
     const dietaryValues = getValues(['isVegan', 'isGlutenFree', 'isGlutenFree']);
@@ -58,6 +53,10 @@ export default function CreateProductForm({
       price: data.price,
     };
     setState({ products: [...state.products, newProduct] });
+    updateNewProductsList([...state.products, newProduct]);
+    alert('New Product was added');
+    reset();
+    setDietary(true);
   };
 
   async function onSubmit(data: FieldValues): Promise<void> {
