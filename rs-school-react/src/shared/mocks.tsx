@@ -5,6 +5,7 @@ export const products = [
     title: 'Аlmond croissant',
     weight: '250',
     id: 1,
+    isAvailable: true,
   },
   {
     imageSrc: 'https://source.unsplash.com/collection/8613861/350x203',
@@ -12,6 +13,7 @@ export const products = [
     title: 'Apple pie',
     weight: '80',
     id: 2,
+    isAvailable: true,
   },
   {
     imageSrc: 'https://source.unsplash.com/collection/8613861/350x213',
@@ -19,6 +21,7 @@ export const products = [
     title: 'Muffin',
     weight: '80',
     id: 3,
+    isAvailable: true,
   },
   {
     imageSrc: 'https://source.unsplash.com/collection/8613861/350x205',
@@ -26,6 +29,7 @@ export const products = [
     title: 'Hot Dog',
     weight: '200',
     id: 4,
+    isAvailable: true,
   },
   {
     imageSrc: 'https://source.unsplash.com/collection/8613861/350x212',
@@ -33,6 +37,7 @@ export const products = [
     title: 'Chocolate cookies',
     weight: '200',
     id: 5,
+    isAvailable: true,
   },
   {
     imageSrc: 'https://source.unsplash.com/collection/8613861/350x208',
@@ -40,6 +45,7 @@ export const products = [
     title: 'Burger',
     weight: '250',
     id: 6,
+    isAvailable: true,
   },
   {
     imageSrc: 'https://source.unsplash.com/collection/8613861/350x211',
@@ -47,6 +53,7 @@ export const products = [
     title: 'Sushi',
     weight: '250',
     id: 7,
+    isAvailable: true,
   },
   {
     imageSrc: 'https://source.unsplash.com/collection/8613861/350x210',
@@ -54,5 +61,6 @@ export const products = [
     title: 'Brownie',
     weight: '150',
     id: 8,
+    isAvailable: true,
   },
 ];
