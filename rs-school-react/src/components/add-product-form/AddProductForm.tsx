@@ -68,13 +68,15 @@ export default function CreateProductForm({
     <>
       <form onSubmit={handleSubmit((data) => onSubmit(data))} className="form">
         <label>
-          Title <input type="text" {...register('title', { required: true })} />
+          Title <input type="text" {...register('title', { required: true, minLength: 3 })} />
         </label>
-        {errors.title && <div className="error">Enter please Title</div>}
+        {errors.title && (
+          <div className="error">Enter please corect title(at least 3 characters)</div>
+        )}
         <label>
-          Weight <input type="number" {...register('weight', { required: true })} />
+          Weight <input type="number" {...register('weight', { required: true, min: 0 })} />
         </label>
-        {errors.weight && <div className="error">Enter please Weight</div>}
+        {errors.weight && <div className="error">Enter please correct weight</div>}
         <label>
           Price:
           <select {...register('price', { required: true })}>
@@ -86,7 +88,7 @@ export default function CreateProductForm({
         {errors.price && <div className="error">Select please Price</div>}
         <label>
           Start date:
-          <input type="date" {...register('date', { required: true })} />
+          <input type="date" {...register('date', { required: true })} min="2023-04-01" />
         </label>
         {errors.date && <div className="error">Select please Date</div>}
         <label>
