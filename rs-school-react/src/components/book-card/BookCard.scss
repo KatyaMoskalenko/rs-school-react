@@ -10,6 +10,11 @@
   transition: 0.2s ease box-shadow;
   flex-direction: column;
 
+  &:hover {
+    cursor: pointer;
+    opacity: 0.6;
+  }
+
   &-image {
     min-height: 175px;
     max-width: 100%;
@@ -33,6 +38,7 @@
     font-family: 'YSText', sans-serif;
     line-height: 19px;
     text-overflow: ellipsis;
+    font-weight: 600;
   }
 
   &-weight {

@@ -9,7 +9,7 @@ interface BookProps {
 export default function BookCard({ card }: BookProps): ReturnType<React.FC> {
   return (
     <div className="card" data-testid="product-card">
-      {card.name}
+      <div className="card-title">{card.name}</div>
     </div>
   );
 }
