@@ -9,7 +9,7 @@ export interface UpdateProductCardsProps {
 export default function Search({
   updateProductCards,
 }: UpdateProductCardsProps): ReturnType<React.FC> {
-  const [value, setValue] = useState<string | null>(localStorage.getItem('searchValue'));
+  const [value, setValue] = useState<string | null>(null);
   const searchRef = useRef<string | null>();
 
   useEffect(() => {
@@ -22,6 +22,7 @@ export default function Search({
       .then((res) => {
         updateProductCards(res.results);
       });
+
     return () => {
       localStorage.setItem('searchValue', searchRef.current || '');
     };
