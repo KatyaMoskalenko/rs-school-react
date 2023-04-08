@@ -17,9 +17,11 @@ export default function Search({
   }, [value]);
 
   useEffect(() => {
-    fetch(`https://the-one-api.dev/v2/book`)
+    fetch(`https://rickandmortyapi.com/api/character`)
       .then((res) => res.json())
-      .then((res) => updateProductCards(res.docs));
+      .then((res) => {
+        updateProductCards(res.results);
+      });
     return () => {
       localStorage.setItem('searchValue', searchRef.current || '');
     };
@@ -32,9 +34,11 @@ export default function Search({
   function handleFetch(event: React.KeyboardEvent<HTMLFormElement>): void {
     if (event.key === 'Enter') {
       event.preventDefault();
-      fetch(`https://the-one-api.dev/v2/book?name=${value}`)
+      fetch(`https://rickandmortyapi.com/api/character?name=${value}`)
         .then((res) => res.json())
-        .then((res) => updateProductCards(res.docs));
+        .then((res) => {
+          updateProductCards(res.results);
+        });
     }
   }
 

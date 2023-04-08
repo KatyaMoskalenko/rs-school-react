@@ -13,9 +13,9 @@ export default function Home(): ReturnType<React.FC> {
   const [productCards, setProductCards] = useState<Book[]>([]);
 
   return (
-    <div>
+    <div className="card-list-container">
       <Search updateProductCards={setProductCards} />
-      <div className="cards-list">
+      <div className="card-list">
         {productCards.map((card: Book) => (
           <BookCard key={card.id} card={card} />
         ))}
