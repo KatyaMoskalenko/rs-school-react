@@ -1,19 +1,23 @@
 import ProductCard from 'components/product-card/ProductCard';
 import Search from 'components/search/Search';
 import React, { useState } from 'react';
-import { products } from 'shared/mocks';
-import { Product } from 'utils/interfaces';
 import './Home.scss';
+import BookCard from 'components/book-card/BookCard';
+
+export interface Book {
+  id: number;
+  name: string;
+}
 
 export default function Home(): ReturnType<React.FC> {
-  const [productCards] = useState<Product[]>(products);
+  const [productCards, setProductCards] = useState<Book[]>([]);
 
   return (
     <div>
-      <Search />
+      <Search updateProductCards={setProductCards} />
       <div className="cards-list">
-        {productCards.map((card: Product) => (
-          <ProductCard key={card.id} card={card} />
+        {productCards.map((card: Book) => (
+          <BookCard key={card.id} card={card} />
         ))}
       </div>
     </div>
