@@ -4,10 +4,12 @@ import { Book } from 'pages/home/Home';
 
 export interface UpdateProductCardsProps {
   updateProductCards: (books: Book[]) => void;
+  setIsLoading: (loading: boolean) => void;
 }
 
 export default function Search({
   updateProductCards,
+  setIsLoading,
 }: UpdateProductCardsProps): ReturnType<React.FC> {
   const [value, setValue] = useState<string | null>(null);
   const searchRef = useRef<string | null>();
@@ -17,16 +19,18 @@ export default function Search({
   }, [value]);
 
   useEffect(() => {
+    setIsLoading(true);
     fetch(`https://rickandmortyapi.com/api/character`)
       .then((res) => res.json())
       .then((res) => {
         updateProductCards(res.results);
       });
+    setIsLoading(false);
 
     return () => {
       localStorage.setItem('searchValue', searchRef.current || '');
     };
-  }, [updateProductCards]);
+  }, [updateProductCards, setIsLoading]);
 
   function handleSearch(event: React.ChangeEvent<HTMLInputElement>): void {
     setValue(event.target.value);
@@ -35,11 +39,13 @@ export default function Search({
   function handleFetch(event: React.KeyboardEvent<HTMLFormElement>): void {
     if (event.key === 'Enter') {
       event.preventDefault();
+      setIsLoading(true);
       fetch(`https://rickandmortyapi.com/api/character?name=${value}`)
         .then((res) => res.json())
         .then((res) => {
           updateProductCards(res.results);
         });
+      setIsLoading(false);
     }
   }
 
