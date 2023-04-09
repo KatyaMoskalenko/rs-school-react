@@ -19,7 +19,7 @@ export interface Book {
 }
 
 export default function Home(): ReturnType<React.FC> {
-  const [productCards, setProductCards] = useState<Book[]>([]);
+  const [productCards, setProductCards] = useState<Book[] | null>([]);
   const [chosenCard, setChosenCard] = useState<Book | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
