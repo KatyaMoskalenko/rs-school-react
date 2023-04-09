@@ -41,11 +41,15 @@ export default function Search({
       event.preventDefault();
       setIsLoading(true);
       fetch(`https://rickandmortyapi.com/api/character?name=${value}`)
-        .then((res) => res.json())
+        .then((res) => (res ? res.json() : []))
         .then((res) => {
-          updateProductCards(res.results);
+          updateProductCards(res.length ? res.results : []);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          setIsLoading(false);
         });
-      setIsLoading(false);
     }
   }
 

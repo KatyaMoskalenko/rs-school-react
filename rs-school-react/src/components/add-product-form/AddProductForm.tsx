@@ -109,13 +109,17 @@ export default function CreateProductForm({
           <input type="radio" {...register('isAvailable', { required: true })} />
         </label>
         {errors.isAvailable && <div className="error">Check please Availability</div>}
-        <input type="file" {...register('imageSrc', { required: true })} />
+        <label>
+          Add please Image
+          <input type="file" {...register('imageSrc', { required: true })} />
+        </label>
         {errors.imageSrc && <div className="error">Add please Image</div>}
         <button
           type="submit"
           onClick={() => {
             getDietaryValues();
           }}
+          role="button"
         >
           Submit
         </button>

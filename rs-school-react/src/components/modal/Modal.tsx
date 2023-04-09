@@ -12,10 +12,10 @@ export default function Modal({ card, setIsModalOpen }: ModalProps): ReturnType<
     setIsModalOpen(false);
   }
   return (
-    <div className="modal" onClick={closeModal}>
+    <div className="modal" role="dialog" onClick={closeModal}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <div className="modal-content_close-button">
-          <p onClick={closeModal} className="button">
+          <p onClick={closeModal} className="button" role="button">
             X
           </p>
         </div>
