@@ -1,0 +1,70 @@
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+
+  &-content {
+    padding: 25px;
+    background: white;
+    border-radius: 16px;
+    width: 250px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+
+    &_close-button {
+      display: flex;
+      justify-content: flex-end;
+      font-weight: 600;
+
+      .button {
+        margin-bottom: 0;
+        margin-top: 0;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+
+    &_card {
+      &-image {
+        min-height: 175px;
+        max-width: 100%;
+        pointer-events: none;
+        border-radius: 24px;
+      }
+
+      &-title {
+        margin-top: 4px;
+        font-size: 24px;
+        font-family: 'YSText', sans-serif;
+        line-height: 27px;
+        letter-spacing: -0.01em;
+      }
+
+      &-gender {
+        height: 38px;
+        overflow: hidden;
+        font-size: 16px;
+        margin-top: 4px;
+        font-family: 'YSText', sans-serif;
+        line-height: 19px;
+        text-overflow: ellipsis;
+      }
+
+      &-date {
+        color: #9e9b98;
+        margin: 5px 0;
+        font-size: 16px;
+        font-family: 'YSText', sans-serif;
+        line-height: 19px;
+      }
+    }
+  }
+}
