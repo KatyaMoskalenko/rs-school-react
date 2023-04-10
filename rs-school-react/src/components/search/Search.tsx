@@ -11,7 +11,7 @@ export default function Search({
   updateProductCards,
   setIsLoading,
 }: UpdateProductCardsProps): ReturnType<React.FC> {
-  const [value, setValue] = useState<string | null>(null);
+  const [value, setValue] = useState<string | null>(localStorage.getItem('searchValue'));
   const searchRef = useRef<string | null>();
 
   useEffect(() => {
