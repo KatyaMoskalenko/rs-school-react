@@ -20,14 +20,15 @@ export default function Search({
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(`https://rickandmortyapi.com/api/character`)
-      .then((res) => res.json())
+    fetch(`https://rickandmortyapi.com/api/character?name=${value}`)
+      .then((res) => (res ? res.json() : null))
       .then((res) => {
-        updateProductCards(res.results);
+        updateProductCards(res ? res.results : null);
         setIsLoading(false);
       })
       .catch((error) => {
         console.log(error);
+        updateProductCards(null);
         setIsLoading(false);
       });
     setIsLoading(false);
