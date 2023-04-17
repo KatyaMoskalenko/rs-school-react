@@ -1,6 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './Search.scss';
 import { Book } from 'pages/home/Home';
+import { useDispatch, useSelector } from 'react-redux';
+import { saveSearchValue } from 'redux/actions';
+import { Store } from 'redux/reducer';
 
 export interface UpdateProductCardsProps {
   updateProductCards: (books: Book[] | null) => void;
@@ -11,8 +14,11 @@ export default function Search({
   updateProductCards,
   setIsLoading,
 }: UpdateProductCardsProps): ReturnType<React.FC> {
-  const [value, setValue] = useState<string | null>(localStorage.getItem('searchValue'));
+  const [value, setValue] = useState<string | null>(
+    useSelector((state: Store): string => state.searchValue || '')
+  );
   const searchRef = useRef<string | null>();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     searchRef.current = value;
@@ -34,9 +40,9 @@ export default function Search({
     setIsLoading(false);
 
     return () => {
-      localStorage.setItem('searchValue', searchRef.current || '');
+      dispatch(saveSearchValue(searchRef.current || ''));
     };
-  }, [updateProductCards, setIsLoading]);
+  }, [updateProductCards, setIsLoading, dispatch]);
 
   function handleSearch(event: React.ChangeEvent<HTMLInputElement>): void {
     setValue(event.target.value);

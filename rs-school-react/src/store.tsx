@@ -1,7 +1,8 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { characters } from '../src/redux/reducer';
 
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: combineReducers({ characters }),
   devTools: process.env.NODE_ENV !== 'production',
 });
 
