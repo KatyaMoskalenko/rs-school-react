@@ -14,9 +14,8 @@ export default function Search({
   updateProductCards,
   setIsLoading,
 }: UpdateProductCardsProps): ReturnType<React.FC> {
-  const [value, setValue] = useState<string | null>(
-    useSelector((state: Store): string => state.searchValue || '')
-  );
+  const searchValue = useSelector((state: Store): string => state.searchValue);
+  const [value, setValue] = useState<string | null>(searchValue);
   const searchRef = useRef<string | null>();
   const dispatch = useDispatch();
 
@@ -26,7 +25,7 @@ export default function Search({
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(`https://rickandmortyapi.com/api/character?name=${value}`)
+    fetch(`https://rickandmortyapi.com/api/character?name=${value || ''}`)
       .then((res) => (res ? res.json() : null))
       .then((res) => {
         updateProductCards(res ? res.results : null);
@@ -51,8 +50,9 @@ export default function Search({
   function handleFetch(event: React.KeyboardEvent<HTMLFormElement>): void {
     if (event.key === 'Enter') {
       event.preventDefault();
+      dispatch(saveSearchValue(value || ''));
       setIsLoading(true);
-      fetch(`https://rickandmortyapi.com/api/character?name=${value}`)
+      fetch(`https://rickandmortyapi.com/api/character?name=${value || ''}`)
         .then((res) => (res ? res.json() : null))
         .then((res) => {
           updateProductCards(res ? res.results : null);

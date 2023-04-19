@@ -9,7 +9,7 @@ import {
 import { Book } from 'pages/home/Home';
 
 export interface Store {
-  searchValue: string | undefined;
+  searchValue: string;
   characters: Book[] | null;
 }
 
