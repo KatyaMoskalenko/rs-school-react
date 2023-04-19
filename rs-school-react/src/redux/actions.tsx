@@ -19,10 +19,6 @@ export function saveSearchValue(value: string) {
   return { type: SAVE_SEARCH_VALUE, value };
 }
 
-export function getSearchValue(value: string) {
-  return { type: GET_SEARCH_VALUE, value };
-}
-
 export function requestCharacters(value: string) {
   return { type: REQUEST_CHARACTERS, value };
 }

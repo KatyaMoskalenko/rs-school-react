@@ -1,7 +1,7 @@
+import { AxiosResponse } from 'axios';
 import {
   Action,
   FAIL_GETTING_CHARACTERS,
-  GET_SEARCH_VALUE,
   RECEIVE_CHARACTERS,
   REQUEST_CHARACTERS,
   SAVE_SEARCH_VALUE,
@@ -10,35 +10,30 @@ import { Book } from 'pages/home/Home';
 
 export interface Store {
   searchValue: string;
-  characters: Book[] | null;
+  characters: AxiosResponse<Book[]> | null;
 }
 
 const initialState: Store = {
   searchValue: '',
-  characters: [],
+  characters: null,
 };
 
-export function characters(state = initialState, action: Action) {
+export function characters(state = initialState, action: Action): Store {
   switch (action.type) {
     case SAVE_SEARCH_VALUE: {
-      return { ...state, searchValue: action.value };
-    }
-
-    case GET_SEARCH_VALUE: {
-      const searchValue = state.searchValue;
-      return searchValue;
+      return { ...state, searchValue: action.value || '' };
     }
 
     case REQUEST_CHARACTERS: {
-      return { ...state, loading: true };
+      return { ...state };
     }
 
     case FAIL_GETTING_CHARACTERS: {
-      return { ...state, error: action.error };
+      return { ...state };
     }
 
     case RECEIVE_CHARACTERS: {
-      return { ...state, characters: action.res };
+      return { ...state, characters: action.res! };
     }
     default: {
       return state || initialState;
