@@ -19,10 +19,8 @@ export interface Book {
 }
 
 export default function Home(): ReturnType<React.FC> {
-  const [productCards, setProductCards] = useState<Book[] | null>([]);
   const [chosenCard, setChosenCard] = useState<Book | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   function openModal(card: Book): void {
     setChosenCard(card);
@@ -31,14 +29,9 @@ export default function Home(): ReturnType<React.FC> {
 
   return (
     <div className="card-list-container">
-      <Search updateProductCards={setProductCards} setIsLoading={setIsLoading} />
-      {isLoading ? (
-        <h1>Progressing ... </h1>
-      ) : productCards ? (
-        <CardsList productCards={productCards} openModal={openModal} />
-      ) : (
-        <h1>Sorry, nothing was find</h1>
-      )}
+      <Search />
+
+      <CardsList openModal={openModal} />
 
       {isModalOpen && <Modal card={chosenCard} setIsModalOpen={setIsModalOpen} />}
     </div>

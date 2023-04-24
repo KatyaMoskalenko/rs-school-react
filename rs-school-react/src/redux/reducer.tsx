@@ -1,4 +1,3 @@
-import { AxiosResponse } from 'axios';
 import {
   Action,
   FAIL_GETTING_CHARACTERS,
@@ -10,12 +9,16 @@ import { Book } from 'pages/home/Home';
 
 export interface Store {
   searchValue: string;
-  characters: AxiosResponse<Book[]> | null;
+  characters: Book[] | null;
+  isLoading: boolean;
+  isError: boolean;
 }
 
 const initialState: Store = {
   searchValue: '',
   characters: null,
+  isLoading: false,
+  isError: false,
 };
 
 export function characters(state = initialState, action: Action): Store {
@@ -25,15 +28,15 @@ export function characters(state = initialState, action: Action): Store {
     }
 
     case REQUEST_CHARACTERS: {
-      return { ...state };
+      return { ...state, isLoading: true };
     }
 
     case FAIL_GETTING_CHARACTERS: {
-      return { ...state };
+      return { ...state, isError: true, isLoading: false };
     }
 
     case RECEIVE_CHARACTERS: {
-      return { ...state, characters: action.res! };
+      return { ...state, characters: action.res || null, isLoading: false, isError: false };
     }
     default: {
       return state || initialState;

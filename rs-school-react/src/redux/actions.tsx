@@ -1,11 +1,11 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import { Dispatch } from '@reduxjs/toolkit';
 import { Book } from 'pages/home/Home';
 
 export interface Action {
   type: string;
   value?: string;
-  res?: AxiosResponse<Book[]>;
+  res?: Book[];
   error?: string;
 }
 
@@ -23,7 +23,7 @@ export function requestCharacters(value: string) {
   return { type: REQUEST_CHARACTERS, value };
 }
 
-export function receiveCharacters(res: AxiosResponse<Book[]>) {
+export function receiveCharacters(res: Book[]) {
   return { type: RECEIVE_CHARACTERS, res };
 }
 
@@ -35,7 +35,7 @@ export function getCharacters(value: string) {
   return function (dispatch: Dispatch) {
     dispatch(requestCharacters(value));
     return axios.get(`https://rickandmortyapi.com/api/character?name=${value}`).then(
-      (res) => dispatch(receiveCharacters(res)),
+      (res) => dispatch(receiveCharacters(res.data.results)),
       (error) => dispatch(failGettingCharacters(error))
     );
   };
