@@ -1,0 +1,90 @@
+.card {
+  width: 217px;
+  max-height: 30px;
+  border-radius: 24px;
+  margin: 12px auto;
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  background: #f5f4f2;
+  transition: 0.2s ease box-shadow;
+  flex-direction: column;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.6;
+  }
+
+  &-image {
+    min-height: 175px;
+    max-width: 100%;
+    pointer-events: none;
+    border-radius: 24px;
+  }
+
+  &-price {
+    margin-top: 4px;
+    font-size: 24px;
+    font-family: 'YSText', sans-serif;
+    line-height: 27px;
+    letter-spacing: -0.01em;
+  }
+
+  &-title {
+    height: 38px;
+    overflow: hidden;
+    font-size: 16px;
+    margin-top: 4px;
+    font-family: 'YSText', sans-serif;
+    line-height: 19px;
+    text-overflow: ellipsis;
+    font-weight: 600;
+  }
+
+  &-weight {
+    color: #9e9b98;
+    margin: 5px 0;
+    font-size: 16px;
+    font-family: 'YSText', sans-serif;
+    line-height: 19px;
+  }
+
+  &-tags {
+    display: flex;
+    flex-direction: row;
+    margin: 4px 0;
+
+    div {
+      color: orange;
+      font-size: 12px;
+      font-weight: 600;
+      margin-right: 10px;
+    }
+  }
+
+  &-button {
+    padding: 14px;
+    color: #21201f;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    min-width: 24px;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 24px;
+
+    &.inactive {
+      opacity: 0.8;
+    }
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &__text {
+      font-family: 'YSText', sans-serif;
+      font-size: 16px;
+    }
+  }
+}
